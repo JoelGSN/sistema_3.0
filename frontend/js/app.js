@@ -35,20 +35,25 @@ buscar_venda();
 
 //ABA DE RELATÓRIOS INICIO
 //PARTE DOS BOTÕES INICIO
+let nomeRelatorio = "";
 function cadcl() {
     campo.value = "cadcl";
+    nomeRelatorio = "De Cadastro de Clientes";
     relatorio();
 }
 function cadp() {
     campo.value = "cadp";
+    nomeRelatorio = "De Cadastro de Produtos";
     relatorio();
 }
 function comp() {
     campo.value = "compra";
+    nomeRelatorio = "De Compras";
     relatorio();
 }
 function vend() {
     campo.value = "venda";
+    nomeRelatorio = "De Vendas Executadas";
     relatorio();
 }
 //PARTE DOS BOTÕES FIM
@@ -57,7 +62,8 @@ function relatorio() {
     if (campo.value === "cadcl") {
         let i = 1
         function listarcli() {
-            dadosrl.innerHTML = 'Relatório de Cadastro de Clientes'
+            // dadosrl.innerHTML = 'Relatório de Cadastro de Clientes'
+            dadosrl.innerHTML = `<span style="color: red;"> => <span style="color: black; font-size: 1.8rem;"> Relatório ${nomeRelatorio} <span style="color: red;"> <= <span style="color: black;">`;
             for (let cliente of clientes) {
                 dadosrl.innerHTML += `<p><br>${i++}º <span style="color: red;"> => <span style="color: black;"> Nome do Cliente: ${cliente.nome}   ||   CPF: ${cliente.cpfoucnpj}<span style="color: red;"> <= <span style="color: black;"></p>`
             }
@@ -68,7 +74,8 @@ function relatorio() {
             let i = 1
             let total_estoque = 0
             function listarpdi() {
-                dadosrl.innerHTML = 'Relatório de Cadastro de Produtos'
+                // dadosrl.innerHTML = 'Relatório de Cadastro de Produtos'
+                dadosrl.innerHTML = `<span style="color: red;"> => <span style="color: black; font-size: 1.8rem;">Relatório ${nomeRelatorio}<span style="color: red;"> <= <span style="color: black;">`;
                 for (let produto of produtos) {
                     let totale = produto.preco * produto.quantidade
                     total_estoque += totale
@@ -84,7 +91,8 @@ function relatorio() {
                 let somatorio = 0;
                 let somaestoque = 0
                 function listarvd() {
-                    dadosrl.innerHTML = 'Relatório de Vendas'
+                    // dadosrl.innerHTML = 'Relatório de Vendas'
+                    dadosrl.innerHTML = `<span style="color: red;"> => <span style="color: black; font-size: 1.8rem;">Relatório ${nomeRelatorio}<span style="color: red;"> <= <span style="color: black;">`;
                     for (let venda of vendas) {
                         let total = venda.quantidade_vendida * venda.preco;
                         let totalqtd = venda.quantidade_vendida;
@@ -287,8 +295,10 @@ function venderpd() {
                 nome: nomev.value,
                 quantidade: quantidadev.value
             }
+
             vendas.push(venda)
             localStorage.setItem("vendas", JSON.stringify(vendas))
+            produtos.push(produto)
             localStorage.setItem("produtos", JSON.stringify(produtos));
             // alert("Alterado de "+qtd_antiga+" para "+ idpd.value+" ou "+produto.quantidade);
             alert("Venda Executada!! Novo Estoque: " + qtd_novo);
@@ -403,13 +413,16 @@ async function comp_produto() {
         preco: pd.preco,
         quantidade: Number(pd.quantidade) + vlrsoma
     }
+
+    produtos.push(produto_compra)
+    localStorage.setItem("produtos", JSON.stringify(produtos));
     let resposta = await fetch(`http://localhost:3000/produto/${pd.nome_produto}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(produto_compra)
     })
     if (resposta.ok) {
-        alert("Compra do produto {[ " + produto_compra.nome_produto + " ]} realizada com Sucesso! ")
+        alert(`Compra do produto {[ ${produto_compra.nome_produto} de ${produto_compra.quantidade} un  ]} realizada com Sucesso! `)
         pd.quantidade = produto_compra.quantidade;
     }
 }
@@ -450,6 +463,11 @@ async function vend_produto() {
         preco: pd.preco,
         quantidade_vendida: qtdvenda
     };
+
+    vendas.push(registro_venda)
+    localStorage.setItem("vendas", JSON.stringify(vendas))
+    produtos.push(produto_venda)
+    localStorage.setItem("produtos", JSON.stringify(produtos));
 
     let resposta = await fetch(`http://localhost:3000/produto/${pd.nome_produto}`, {
         method: "PUT",
