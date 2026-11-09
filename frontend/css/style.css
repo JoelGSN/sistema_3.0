@@ -532,11 +532,14 @@ main {
         flex-wrap: wrap;
         justify-content: center;
         gap: 6px;
+        
+        
     }
 
     .menu-vertical a {
         padding: 8px 10px;
         font-size: 0.85rem;
+        color: greenyellow;
     }
 
     h1,

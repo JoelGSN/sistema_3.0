@@ -131,6 +131,7 @@ async function cli() {
                         uf: uf.value
                     }
                     clientes.push(cliente)
+                    localStorage.setItem("clientes", JSON.stringify(clientes))
 
                     await fetch('http://localhost:3000/cliente', {
                         method: 'POST',
@@ -138,7 +139,6 @@ async function cli() {
                         body: JSON.stringify(cliente)
                     })
 
-                    localStorage.setItem("clientes", JSON.stringify(clientes))
 
                     alert("Cadastro Efetuado com Sucesso!!")
                 } else alert("Cliente já foi cadastrado!")
