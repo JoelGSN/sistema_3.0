@@ -63,7 +63,7 @@ function relatorio() {
         let i = 1
         function listarcli() {
             // dadosrl.innerHTML = 'Relatório de Cadastro de Clientes'
-            dadosrl.innerHTML = `<span style="color: red;"> => <span style="color: black; font-size: 1.8rem;"> Relatório ${nomeRelatorio} <span style="color: red;"> <= <span style="color: black;">`;
+            dadosrl.innerHTML = `<span style="color: red;font-size: 1.8rem;"> => <span style="color: black;"> Relatório ${nomeRelatorio} <span style="color: red;"> <= <span style="color: black;">`;
             for (let cliente of clientes) {
                 dadosrl.innerHTML += `<p><br>${i++}º <span style="color: red;"> => <span style="color: black;"> Nome do Cliente: ${cliente.nome}   ||   CPF: ${cliente.cpfoucnpj}<span style="color: red;"> <= <span style="color: black;"></p>`
             }
@@ -75,7 +75,7 @@ function relatorio() {
             let total_estoque = 0
             function listarpdi() {
                 // dadosrl.innerHTML = 'Relatório de Cadastro de Produtos'
-                dadosrl.innerHTML = `<span style="color: red;"> => <span style="color: black; font-size: 1.8rem;">Relatório ${nomeRelatorio}<span style="color: red;"> <= <span style="color: black;">`;
+                dadosrl.innerHTML = `<span style="color: red; font-size: 1.8rem;"> => <span style="color: black;">Relatório ${nomeRelatorio}<span style="color: red;"> <= <span style="color: black;">`;
                 for (let produto of produtos) {
                     let totale = produto.preco * produto.quantidade
                     total_estoque += totale
@@ -92,7 +92,7 @@ function relatorio() {
                 let somaestoque = 0
                 function listarvd() {
                     // dadosrl.innerHTML = 'Relatório de Vendas'
-                    dadosrl.innerHTML = `<span style="color: red;"> => <span style="color: black; font-size: 1.8rem;">Relatório ${nomeRelatorio}<span style="color: red;"> <= <span style="color: black;">`;
+                    dadosrl.innerHTML = `<span style="color: red; font-size: 1.8rem;"> => <span style="color: black;">Relatório ${nomeRelatorio}<span style="color: red;"> <= <span style="color: black;">`;
                     for (let venda of vendas) {
                         let total = venda.quantidade_vendida * venda.preco;
                         let totalqtd = venda.quantidade_vendida;
@@ -140,19 +140,20 @@ async function cli() {
                     })
 
 
-                    alert("Cadastro Efetuado com Sucesso!!")
+                    alert(`Cadastro ({ ${nomec.value} }) efetuado com Sucesso!!`)
+                    nomec = ""
+                    cpf = ""
+                    rua = ""
+                    numero = ""
+                    uf = ""
+
                 } else alert("Cliente já foi cadastrado!")
             } else alert("deve conter apenas 11 digitos caso for CPF ou 14 digitos caso for CNPJ")
         } else alert("Nome so Aceita Letras , acentos e Espaço!")
     } else alert("Preencha todos os campos!")
     listar()
 }
-// function listarcl() {
-//     dadoscl.innerHTML = '<== Cadastrados ==>'
-//     for (let cliente of clientes) {
-//         dadoscl.innerHTML += `<p>Nome: ${cliente.nome} || CPF: ${cliente.cpf}</p>`
-//     }
-// }
+
 //ABA DE CLIENTES FIM
 //ABA DE PRODUTOS INICIO
 async function pro() {
@@ -186,7 +187,12 @@ async function pro() {
                     })
 
                     localStorage.setItem("produtos", JSON.stringify(produtos))
-                    alert("Produto Cadastrado com sucesso!")
+                    alert(`Produto ({ ${nomep.value} }) Cadastrado com sucesso!`)
+                    nomep = ""
+                    tipo = ""
+                    cor = ""
+                    preco = ""
+                    quantidade = ""
                 } else alert("Produto ja Cadastrado!")
             } else alert("Quantidade não pode ser negativa")
         } else alert("Valor não pode ser 0 ou negativo")
@@ -227,7 +233,12 @@ function alterarcl() {
         }
     }
     localStorage.setItem("clientes", JSON.stringify(clientes))
-    alert("Alteração do Cliente " + nomec.value + " Efetuada Com Sucesso!!!")
+    alert(`Alteração do Cliente " ${nome.value} " Efetuada Com Sucesso!!!`)
+    nomec = ""
+    cpf = ""
+    rua = ""
+    numero = ""
+    uf = ""
 
 }
 function clidelete() {
@@ -300,6 +311,7 @@ function venderpd() {
             localStorage.setItem("vendas", JSON.stringify(vendas))
             produtos.push(produto)
             localStorage.setItem("produtos", JSON.stringify(produtos));
+
             // alert("Alterado de "+qtd_antiga+" para "+ idpd.value+" ou "+produto.quantidade);
             alert("Venda Executada!! Novo Estoque: " + qtd_novo);
         } else {
@@ -326,6 +338,7 @@ async function buscar_cliente() {
     const dados = await busca.json()
     clientes.length = 0
     clientes.push(...dados)
+    
 }
 
 async function buscar_venda() {
@@ -349,6 +362,7 @@ async function encontrar_cliente() {
         numero.value = c.numero
         uf.value = c.uf
     }
+    alert(`Cliente " ${nomec.value} " Localizado`)
 }
 async function editar_cliente() {
     const c = await clientes.find(item => item.cpfoucnpj === cpf.value)
@@ -365,6 +379,7 @@ async function editar_cliente() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(cliente_atualizado)
         })
+        alert(`Alteração do Cliente ({ ${nomec.value} }) Efetuada Com Sucesso!!!`)
     }
 
 }
@@ -379,7 +394,7 @@ async function deletar_cliente() {
             method: "DELETE"
 
         })
-        alert("O Cliente => " + c.nome + " <=foi deletado com sucesso")
+        alert(`O Cliente => ({ ${c.nome} }) <=foi deletado com sucesso`)
     }
 
 }
