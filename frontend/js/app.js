@@ -65,7 +65,7 @@ function relatorio() {
             // dadosrl.innerHTML = 'Relatório de Cadastro de Clientes'
             dadosrl.innerHTML = `<span style="color: red;font-size: 1.8rem;"> => <span style="color: black;"> Relatório ${nomeRelatorio} <span style="color: red;"> <= <span style="color: black;">`;
             for (let cliente of clientes) {
-                dadosrl.innerHTML += `<p><br>${i++}º <span style="color: red;"> => <span style="color: black;"> Nome do Cliente: ${cliente.nome}   ||   CPF: ${cliente.cpfoucnpj}<span style="color: red;"> <= <span style="color: black;"></p>`
+                dadosrl.innerHTML += `<p><br>${i++}º <span style="color: red;"> => ${cliente.id}<span style="color: black;"> Nome do Cliente: ${cliente.nome}   ||   CPF: ${cliente.cpfoucnpj}<span style="color: red;"> <= <span style="color: black;"></p>`
             }
         }
         listarcli()
