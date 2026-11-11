@@ -1,0 +1,169 @@
+/* ==========================================================================
+   LOJA DE MÓVEIS - DESIGN SYSTEM & STYLESHEET
+   Esquema de Cores: Warm Wood & Modern Elegance (Earthy Neutrals)
+   ========================================================================== */
+
+:root {
+  /* Paleta de Cores Principal */
+  --primary-color: #2C3E50;      /* Azul escuro sofisticado / Estrutura */
+  --primary-dark: #1A252F;
+  --secondary-color: #D35400;    /* Tom de madeira quente / Destaque (Terracota) */
+  --accent-color: #E67E22;       /* Tom âmbar / Hover */
+  
+  /* Tons Neutros e Superfícies */
+  --bg-color: #F9F9F6;           /* Fundo levemente off-white natural */
+  --surface-color: #FFFFFF;      /* Cartões e containers */
+  --text-main: #333333;          /* Texto principal */
+  --text-muted: #7F8C8D;         /* Texto secundário */
+  --border-color: #E0E0D1;       /* Bordas sutis */
+  
+  /* Status */
+  --success-color: #27AE60;
+  --error-color: #C0392B;
+  
+  /* Tipografia e Layout */
+  --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --border-radius: 8px;
+  --transition-speed: 0.3s ease;
+}
+
+/* Reset Global e Estilos Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* Cabeçalho e Navegação */
+header {
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  transition: color var(--transition-speed);
+}
+
+.nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+/* Layout Principal / Vitrine */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--secondary-color);
+  display: inline-block;
+  padding-bottom: 0.25rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Cartão de Produto */
+.product-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  background-color: #EAEAE1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.product-info {
+  padding: 1.5rem;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--transition-speed);
+  text-align: center;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: var(--accent-color);
+}
+
+/* Rodapé */
+footer {
+  background-color: var(--primary-dark);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+}

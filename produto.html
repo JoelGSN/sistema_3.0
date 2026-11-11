@@ -9,54 +9,75 @@
 </head>
 <body>
   <div class="layout-site">
+    
+    <!-- Barra Lateral de Navegação -->
     <aside class="barra-lateral">
       <nav class="menu-vertical">
         <ul>
           <li><a href="index.html">🏠 Início</a></li>
           <li><a href="clientes.html">👥 Clientes</a></li>
           <li><a href="produto.html" class="ativo">📦 Produtos</a></li>
-          <li><a href="relatorio.html">📊 Relatorios</a></li>
+          <li><a href="relatorio.html">📊 Relatórios</a></li>
         </ul>
       </nav>
     </aside>
+
+    <!-- Conteúdo Principal -->
     <main>
       <h1>Menu de Cadastro | Alterações</h1>
-      <form class="css_form_container" >
-          <li><a>Cadastro de Produto</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='js_nomep' type="text">
-          <li><a>Tipo do Produto</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='js_tipo' type="text">
-          <li><a>Cor do Produto</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='js_cor' type="text">
-          <li><a>Preço</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='js_preco' type="text">
-          <li><a>Quantidade</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='js_quantidade' type="text">
-          <br>
-          <section class="btncontainer" id="btncadcliente">
-            <button type="button" class="botaogeral" onclick="pro()">Cadastrar Produto</button>
-          </section>
+      
+      <!-- Formulário de Cadastro de Produto -->
+      <form class="css_form_container">
+        <label class="nome_inputs">Cadastro de Produto</label>
+        <input class="css_input_txt inputcadcl" id="js_nomep" type="text" placeholder="Nome do produto">
+        
+        <label class="nome_inputs">Tipo do Produto</label>
+        <input class="css_input_txt inputcadcl" id="js_tipo" type="text" placeholder="Ex: Mesa, Cadeira">
+        
+        <label class="nome_inputs">Cor do Produto</label>
+        <input class="css_input_txt inputcadcl" id="js_cor" type="text" placeholder="Ex: Imbuia, Branco">
+        
+        <label class="nome_inputs">Preço</label>
+        <input class="css_input_txt inputcadcl" id="js_preco" type="text" placeholder="R$ 0,00">
+        
+        <label class="nome_inputs">Quantidade</label>
+        <input class="css_input_txt inputcadcl" id="js_quantidade" type="text" placeholder="0">
+        
+        <section class="btncontainer" id="btncadcliente">
+          <button type="button" class="botaogeral" onclick="pro()">Cadastrar Produto</button>
+        </section>
       </form>
-      <br>
+
+      <!-- NOVO: Formulário de Importação de Planilha -->
+      <form class="css_form_container" id="form-importacao">
+        <h2>Importação em Massa Para Cadastro (Excel)</h2>
+        <label class="nome_inputs">Selecione o arquivo (.xlsx ou .csv)</label>
+        <input type="file" id="arquivo-excel" class="css_input_txt" accept=".xlsx, .xls, .csv">
+        <div class="btncontainer">
+          <button type="button" class="botaogeral" onclick="enviarPlanilha()">Enviar e Importar</button>
+        </div>
+      </form>
+
       <h2>Compra de Produto | Venda de Produto</h2>
-      <form class="css_form_container" >
-        <br>
-          <li><a>Nome do Produto</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='nomecv' type="text">
-          <li><a>Quantidade</a></li>
-          <input class="css_input_txt" class="inputcadcl" id='quantidadecv' type="number">
-          <br>
-          <section>
-            <!-- <button type="button" class="botaogeral" onclick="comprapd()">Comprar Produto</button> -->
-             <button type="button" class="botaogeral" onclick="comp_produto()">Comprar Produto</button>
-            <!-- <button type="button" class="botaogeral" onclick="venderpd()">Vender Produto</button> -->
-             <button type="button" class="botaogeral" onclick="vend_produto()">Vender Produto</button>
-          </section>
+      
+      <!-- Formulário de Compra e Venda -->
+      <form class="css_form_container">
+        <label class="nome_inputs">Nome do Produto</label>
+        <input class="css_input_txt inputcadcl" id="nomecv" type="text" placeholder="Produto desejado">
+        
+        <label class="nome_inputs">Quantidade</label>
+        <input class="css_input_txt inputcadcl" id="quantidadecv" type="number" placeholder="0">
+        
+        <section class="btncontainer">
+          <button type="button" class="botaogeral" onclick="comp_produto()">Comprar Produto</button>
+          <button type="button" class="botaogeral" onclick="vend_produto()">Vender Produto</button>
+        </section>
       </form>
+
+      <!-- Listagem dinâmica de produtos -->
       <div class="principal" id="lista-produto"></div>
     </main>
+    
   </div>
-
 </body>
-
 </html>

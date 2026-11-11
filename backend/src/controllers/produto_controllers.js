@@ -1,6 +1,7 @@
 import * as produtoService from '../services/produtoService.js'
 
 
+
 export async function listar (req,res) {
     
 const produto = await produtoService.listarproduto()
@@ -56,3 +57,24 @@ export async function comprar(req, res) {
 
     return res.json(produtoAtualizado)
 }
+
+
+//add depois
+
+// O resto do seu código com as funções abaixo...
+export const importar = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ erro: 'Nenhum arquivo enviado.' });
+        }
+
+        const resultado = await produtoService.importarPlanilhaService(req.file.path);
+
+        return res.status(200).json({ 
+            mensagem: `Sucesso! ${resultado.total} produtos importados.` 
+        });
+    } catch (erro) {
+        console.error(erro);
+        return res.status(500).json({ erro: 'Erro ao processar a importação.' });
+    }
+};

@@ -1,9 +1,19 @@
 import * as prod_controllers from '../controllers/produto_controllers.js'
 import { Router } from 'express'
 
+//incluido depois
+import upload from '../config/multer.js' // Se estiver usando o multer para o arquivo
+
+
 const router = Router()
 
+
 router.get('/', prod_controllers.listar )
+
+//incluido depois
+router.post('/importar', upload.single('planilha'), prod_controllers.importar)
+
+
 
 router.get('/:produto', prod_controllers.buscarcPornome )
 

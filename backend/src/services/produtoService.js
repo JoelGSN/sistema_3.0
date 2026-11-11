@@ -1,4 +1,6 @@
 import bd_produto from '../models/bd_produto.js'
+import xlsx from 'xlsx';
+import Produto from '../models/bd_produto.js'; // Ajuste o caminho do seu Model do Sequelize
 
 
 
@@ -57,3 +59,30 @@ export async function comprarproduto(nmproduto, qtdcomprada) {
 
     return produtovar
 }
+
+
+//add depois
+
+
+export const importarPlanilhaService = async (caminhoArquivo) => {
+    // 1. Lê a planilha usando a biblioteca xlsx
+    const workbook = xlsx.readFile(caminhoArquivo);
+    const sheetName = workbook.SheetNames[0];
+    const dadosPlanilha = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+    let contador = 0;
+
+    // 2. Percorre as linhas e insere no banco via Sequelize
+    for (let item of dadosPlanilha) {
+        await Produto.create({
+            nome_produto: item.Nome || item.nome_produto || item.nome,
+            tipo: item.Tipo || item.tipo,
+            cor: item.Cor || item.cor,
+            preco: item.Preco || item.preco,
+            quantidade: item.Quantidade || item.quantidade
+        });
+        contador++;
+    }
+
+    return { total: contador };
+};
